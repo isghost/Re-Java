@@ -23,7 +23,7 @@ public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherS
 
     @Override
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
-        registration.setMultipartConfig(new MultipartConfigElement("D:\\web\\workspace\\tmp", 2000, 4194304, 0));
+        registration.setMultipartConfig(new MultipartConfigElement("D:\\web\\workspace\\tmp", 1000000, 4194304, 0));
     }
 
 }
