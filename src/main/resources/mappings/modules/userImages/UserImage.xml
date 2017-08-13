@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="www.ccyblog.novel.modules.images.dao.UserImageDao">
+    <insert id="insert" parameterType="www.ccyblog.novel.modules.images.entity.UserImage" useGeneratedKeys="true" >
+        insert into userimage(fileName) values(#{fileName})
+        <selectKey keyProperty="imageid" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+    </insert>
+
+    <select id="select" parameterType="list" resultType="string">
+      select fileName from userimage where imageid in
+      <foreach collection="list" item="tmpId" open="(" close=")" separator=",">
+          #{tmpId}
+      </foreach>
+    </select>
+</mapper>

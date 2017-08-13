@@ -21,16 +21,15 @@ import java.util.regex.Pattern;
  */
 @Log4j
 @Service
-public class CloudStorage {
+public class CloudStorageService {
     long appId = 1252097459;
     String secretId = "AKIDLalkcIxYSCnGblrhZwBHBTqP4sX0ZST5";
     String secretKey = "gD95yfMyQgniU8MtRp7Ecko4Rl0g6Tq1";
     // 设置要操作的bucket
     String bucketName = "novel";
     COSClient cosClient = null;
-    Pattern pattern = Pattern.compile("\\.[^\\.]*$");
     private final String salt = CommonUtil.generateRandomSalt();
-    public CloudStorage(){
+    public CloudStorageService(){
         // 初始化秘钥信息
         Credentials cred = new Credentials(appId, secretId, secretKey);
         // 初始化客户端配置
@@ -38,30 +37,13 @@ public class CloudStorage {
         // 设置bucket所在的区域，比如华南园区：gz； 华北园区：tj；华东园区：sh ；
         clientConfig.setRegion("sh");
 
+        clientConfig.setConnectionTimeout(10000);
+
         // 初始化cosClient
         cosClient = new COSClient(clientConfig, cred);
 
     }
 
-    public String saveImage(MultipartFile multipartFile){
-        byte [] contentBuffer;
-        try {
-            contentBuffer = multipartFile.getBytes();
-        } catch (IOException e) {
-            log.error("multipartFile getBytes error");
-            e.printStackTrace();
-            return "{'code': -1, 'message':'internal error'}";
-        }
-        String newFileName = new Md5Hash(contentBuffer).toString();
-        String fileName = multipartFile.getOriginalFilename();
-        Matcher matcher = pattern.matcher(fileName);
-        String suffix = "";
-        if(matcher.find()){
-            newFileName += matcher.group();
-        }
-        return uploadFileToCloud(newFileName, contentBuffer);
-
-    }
 
     public String uploadFileToCloud(String fileName, byte[] contentBuffer){
         UploadFileRequest uploadFileRequest = new UploadFileRequest(bucketName, "/" + fileName, contentBuffer);

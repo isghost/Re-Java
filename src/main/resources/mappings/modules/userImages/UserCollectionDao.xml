@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="www.ccyblog.novel.modules.images.dao.UserCollectionDao">
+    <update id="update" parameterType="www.ccyblog.novel.modules.images.entity.UserCollection">
+        insert into usercollection(uid, collectionImages) values(#{uid}, #{file}) on duplicate key update collectionImages = #{file}
+    </update>
+    <!--<insert id="create" parameterType="www.ccyblog.novel.modules.images.entity.UserCollection">-->
+        <!--insert into usercollection(uid, collectionImages) values(#{uid}, #{file})-->
+    <!--</insert>-->
+    <resultMap id="collectionResultMap" type="www.ccyblog.novel.modules.images.entity.UserCollection">
+        <id property="uid" column="uid"></id>
+        <id property="file" column="collectionImages"></id>
+    </resultMap>
+    <select id="select" parameterType="int" resultMap="collectionResultMap">
+        select * from usercollection where uid = #{uid}
+    </select>
+</mapper>

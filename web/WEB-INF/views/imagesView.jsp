@@ -1,37 +1,37 @@
 <%--
   Created by ccy.
   User: ccy
-  Date: 2017/8/10
-  Time: 23:06
+  Date: 2017/8/13
+  Time: 16:05
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <%@include file="header.jsp" %>
+    <link href="/css/imageView.css" rel="stylesheet">
     <title>图片浏览</title>
 </head>
 <body>
-    <%--<form action="/images/upload1" method="post" enctype="multipart/form-data">--%>
-        <%--<input id="fileupload1" type="file" name="image" multiple>--%>
-        <%--<<input type="submit">>--%>
-    <%--</form>--%>
+    <div class="container">
+        <img src="" class="imageCeil" id="templetCeil">
+        <div style="clear: both"></div>
+        <nav aria-label="Page navigation" class="navigation">
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous" id="prePage">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li id="page"><a href="#">1</a></li>
+                <li>
+                    <a href="#" aria-label="Next" id="nextPage">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 <%@include file="footer.jsp" %>
-    <input id="fileupload" type="file" accept="image/*" name="image" data-url="/images/upload1" multiple>
-    <script src="/js/libs/jqueryfileup/vendor/jquery.ui.widget.js"></script>
-    <script src="/js/libs/jqueryfileup/jquery.iframe-transport.js"></script>
-    <script src="/js/libs/jqueryfileup/jquery.fileupload.js"></script>
-    <script>
-        $(function () {
-            $('#fileupload').fileupload({
-                dataType: 'json',
-                done: function (e, data) {
-                    console.log("????");
-                    $.each(data.result.files, function (index, file) {
-                        $('<p/>').text(file.name).appendTo(document.body);
-                    });
-                }
-            });
-        });
-    </script>
+    <script src="/js/imageView/imageView.js"></script>
 </body>
 </html>

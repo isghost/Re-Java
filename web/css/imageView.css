@@ -1,0 +1,15 @@
+.imageCeil{
+    width: 200px;
+    height:150px;
+    float: left;
+    display: none;
+    padding: 10px 5px;
+}
+
+#page{
+    display: none;
+}
+
+.pagination{
+    margin: auto;
+}

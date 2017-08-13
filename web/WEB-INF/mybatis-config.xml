@@ -38,6 +38,8 @@
     <mappers>
         <!--<mapper resource="classpath*:mappings/modules/register/Account.xml"/>-->
         <mapper resource="mappings/modules/register/Account.xml"/>
+        <mapper resource="mappings/modules/userImages/UserImage.xml"/>
+        <mapper resource="mappings/modules/userImages/UserCollectionDao.xml"/>
     </mappers>
 
 </configuration>

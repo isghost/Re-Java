@@ -50,6 +50,7 @@
           <element id="library" level="project" name="Maven: org.apache.httpcomponents:httpmime:4.5.1" />
           <element id="library" level="project" name="Maven: org.json:json:20140107" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.7.2" />
+          <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.2.36" />
         </element>
       </element>
     </root>

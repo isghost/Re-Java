@@ -16,6 +16,7 @@
             <ul>
                 <li><a href="/images/shouwanxianfeng.jpg">蜥蜴星球</a></li>
                 <li><a href="/images/diexi.jpg">白雪球</a></li>
+                <li><a href="/">首页</a></li>
             </ul>
         </div>
         <div class="technology">
