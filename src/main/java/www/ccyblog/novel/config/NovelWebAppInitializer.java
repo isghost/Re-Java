@@ -8,7 +8,7 @@ import javax.servlet.ServletRegistration;
 /**
  * Created by Administrator on 2017/7/16.
  */
-public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class NovelWebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     protected Class<?>[] getRootConfigClasses() {
         return new Class<?> []{RootConfig.class};
     }
@@ -23,7 +23,8 @@ public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherS
 
     @Override
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
-        registration.setMultipartConfig(new MultipartConfigElement("D:\\web\\workspace\\tmp", 1000000, 4194304, 0));
+//        registration.setMultipartConfig(new MultipartConfigElement("D:\\web\\workspace\\tmp", 1000000, 4194304, 0));
+        registration.setMultipartConfig(new MultipartConfigElement("/tmp/webtmp", 1000000, 4194304, 0));
     }
 
 }

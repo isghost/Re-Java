@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import www.ccyblog.novel.common.logs.LoginAspect;
 
 import java.io.IOException;
 
@@ -19,6 +20,7 @@ import java.io.IOException;
 @EnableWebMvc
 @ComponentScan("www.ccyblog.novel")
 @ImportResource("WEB-INF/applicationContext.xml")
+@EnableAspectJAutoProxy
 @Log4j
 public class WebConfig extends WebMvcConfigurerAdapter{
     @Bean
