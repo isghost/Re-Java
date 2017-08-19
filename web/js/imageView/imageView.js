@@ -2,10 +2,11 @@
  * Created by isghost on 2017/8/13.
  */
 let searchParams = new URLSearchParams(window.location.search)
+let urlType = searchParams.get("type") || "other"
 $(function(){
     // https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
     let reqUrl = "/image/otherCollection.json";
-    if(searchParams.get("type") == "self"){
+    if(urlType == "self"){
         reqUrl = "/image/collections.json";
     }
     $.ajax({
@@ -35,7 +36,7 @@ function showImage(result){
         $("#templetCeil").clone().insertBefore("#templetCeil")
             .css("display", "inline-block")
             .attr("src", baseUrl + imageUrl[i])
-            .attr("id", "ceil" + i);
+            .attr("id", "ceil" + i)
     }
 }
 
@@ -58,7 +59,7 @@ function showPagination(result){
         showMinPage = curPageNum - halfSize;
         showMaxPage = curPageNum + halfSize;
     }
-    let url = window.location.href.split('?')[0] + "?pageNum=";
+    let url = window.location.href.split('?')[0] + "?type=" + urlType + "&pageNum=";
     for(let i = showMinPage; i <= showMaxPage; i++){
         $("#page").clone().insertBefore("#page")
             .attr("display",  "inline-block")
@@ -70,6 +71,8 @@ function showPagination(result){
         }
 
     }
+
+    $("#loading").css("display", "none");
 
     $("#prePage").attr("href", url + Math.max(curPageNum - 1, 1));
     $("#nextPage").attr("href", url + Math.min(curPageNum + 1, showMaxPage));

@@ -1,5 +1,6 @@
 package www.ccyblog.novel.common.exception;
 
+import lombok.extern.log4j.Log4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.multipart.MultipartException;
@@ -9,9 +10,11 @@ import org.springframework.web.multipart.MultipartException;
  */
 
 @ControllerAdvice
+@Log4j
 public class AppWideExceptionHandler {
     @ExceptionHandler(MultipartException.class)
-    public String sizeError(){
+    public String sizeError(RuntimeException runtimeException){
+        log.warn(runtimeException.getMessage());
         return "errors/errorPictureSize";
     }
 }

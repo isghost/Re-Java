@@ -23,7 +23,7 @@
         <bean id="prop" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
             <property name="locations">
                 <array>
-                    <value>classpath:app.properties</value>
+                    <value>classpath:app_dev.properties</value>
                 </array>
             </property>
         </bean>
@@ -41,7 +41,7 @@
                 <value>root</value>
             </property>
             <property name="password">
-                <value>hchc0815</value>
+                <value>12345678</value>
             </property>
         </bean>
 
@@ -49,7 +49,7 @@
             <!-- 这里是PropertiesFactoryBean类，它也有个locations属性，也是接收一个数组，跟上面一样 -->
             <property name="locations">
                 <array>
-                    <value>classpath:app_dev.properties</value>
+                    <value>classpath:app.properties</value>
                 </array>
             </property>
         </bean>
