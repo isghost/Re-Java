@@ -14,11 +14,11 @@ public class NovelWebAppInitializer extends AbstractAnnotationConfigDispatcherSe
     }
 
     protected Class<?>[] getServletConfigClasses() {
-        return new Class<?> []{WebConfig.class};
+        return new Class<?> []{WebConfig.class, RMIServerConfig.class};
     }
 
     protected String[] getServletMappings() {
-        return new String[]{"/"};
+        return new String[]{"/", "*.service"};
     }
 
     @Override

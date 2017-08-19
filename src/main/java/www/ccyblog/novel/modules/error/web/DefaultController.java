@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Log4j
 @Controller
 public class DefaultController {
-    @RequestMapping(value={"*"})
+    @RequestMapping(value={"/notfound"})
     public String showIndex(Model model){
         return "notfound";
     }

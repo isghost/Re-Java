@@ -20,7 +20,7 @@
             </property>
         </bean>
 
-        <bean id="prop" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <bean id="prop" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
             <property name="locations">
                 <array>
                     <value>classpath:app.properties</value>
@@ -45,7 +45,7 @@
             </property>
         </bean>
 
-        <bean id="prop" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <bean id="prop" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
             <!-- 这里是PropertiesFactoryBean类，它也有个locations属性，也是接收一个数组，跟上面一样 -->
             <property name="locations">
                 <array>
@@ -194,6 +194,20 @@
                              queue-names="novel.alert.queue"/>
 
         </rabbit:listener-container>
+
+        <bean id="loginServiceClient" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean" >
+            <property name="serviceUrl" value="${loginServiceUrl}/login.service"></property>
+            <property name="serviceInterface" value="www.ccyblog.novel.common.service.LoginService"></property>
+        </bean>
+
+        <bean id="simpleUrlHandlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+            <property name="urlMap">
+                <map>
+                    <entry key="/login.service" value-ref="httpInvokerServiceExporter" />
+                </map>
+            </property>
+        </bean>
+
 
     </beans>
 
