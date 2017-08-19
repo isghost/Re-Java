@@ -4,12 +4,17 @@
 let searchParams = new URLSearchParams(window.location.search)
 $(function(){
     // https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
+    let reqUrl = "/image/otherCollection.json";
+    if(searchParams.get("type") == "self"){
+        reqUrl = "/image/collections.json";
+    }
     $.ajax({
         type: "POST",
         data: "pageNum=" + (searchParams.get("pageNum") || 1),
-        url: "/images/collections.json",
+        url: reqUrl,
         success: fillPage
     })
+
 });
 
 /**

@@ -23,8 +23,8 @@ public class NovelWebAppInitializer extends AbstractAnnotationConfigDispatcherSe
 
     @Override
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
-//        registration.setMultipartConfig(new MultipartConfigElement("D:\\web\\workspace\\tmp", 1000000, 4194304, 0));
-        registration.setMultipartConfig(new MultipartConfigElement("/tmp/webtmp", 1000000, 4194304, 0));
+        registration.setMultipartConfig(new MultipartConfigElement("D:\\web\\workspace\\tmp", 4194304, 4194304, 0));
+//        registration.setMultipartConfig(new MultipartConfigElement("/tmp/webtmp", 4194304, 4194304, 0));
     }
 
 }

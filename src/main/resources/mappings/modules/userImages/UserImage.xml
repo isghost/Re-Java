@@ -16,4 +16,10 @@
           #{tmpId}
       </foreach>
     </select>
+    <select id="recentImages" resultType="java.lang.String" >
+        select fileName from userimage limit #{begin}, #{num}
+    </select>
+    <select id="getNum" resultType="java.lang.Integer">
+        select count(*) from userimage
+    </select>
 </mapper>

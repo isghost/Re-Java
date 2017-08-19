@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import lombok.extern.log4j.Log4j;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,12 +21,14 @@ import java.util.*;
  */
 @Log4j
 @Controller
-@RequestMapping("/images")
+@RequestMapping("/image")
 public class ImagesController {
+    private final String IMAGE_INFO_CACHE_NAME = "otherCollection";
     @Autowired
     UserImageService userImageService;
     @RequestMapping("/upload1")
     @RequiresRoles("user")
+    @CacheEvict(value = IMAGE_INFO_CACHE_NAME, allEntries = true)
     public @ResponseBody Map uploadFile(@RequestPart MultipartFile image){
         HashMap<String, Boolean> hashMap = new HashMap<String, Boolean>();
         boolean result = userImageService.saveImage(image);
@@ -42,8 +46,15 @@ public class ImagesController {
 
     @RequiresRoles("user")
     @RequestMapping("/collections.json")
-    public @ResponseBody String getCollectionImages(@RequestParam int pageNum){
+    public @ResponseBody String getCollectionImages(@RequestParam(defaultValue = "1") int pageNum){
         return userImageService.getCollectionInfo(pageNum);
+    }
+
+    @RequiresRoles("user")
+    @RequestMapping("/otherCollection.json")
+    @Cacheable(value = IMAGE_INFO_CACHE_NAME, key = "#pageNum")
+    public @ResponseBody String getOtherUserImages(@RequestParam(defaultValue = "1")int pageNum){
+        return userImageService.getOtherUserImages(pageNum);
     }
 
     @RequiresRoles("user")

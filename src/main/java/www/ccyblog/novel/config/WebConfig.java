@@ -1,6 +1,7 @@
 package www.ccyblog.novel.config;
 
 import lombok.extern.log4j.Log4j;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.*;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
@@ -20,7 +21,8 @@ import java.io.IOException;
 @EnableWebMvc
 @ComponentScan("www.ccyblog.novel")
 @ImportResource("WEB-INF/applicationContext.xml")
-@EnableAspectJAutoProxy
+@EnableAspectJAutoProxy(proxyTargetClass = true)
+@EnableCaching
 @Log4j
 public class WebConfig extends WebMvcConfigurerAdapter{
     @Bean

@@ -1,5 +1,6 @@
 package www.ccyblog.novel.modules.images.dao;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import www.ccyblog.novel.modules.images.entity.UserImage;
 
@@ -13,4 +14,7 @@ import java.util.List;
 public interface UserImageDao {
     int insert(UserImage userImage);
     List<String> select(List<Long> list);
+    List<String> recentImages(@Param("begin") int begin, @Param("num") int num);
+    int getNum();
+//    List<String> recentImages(int begin, int num);
 }

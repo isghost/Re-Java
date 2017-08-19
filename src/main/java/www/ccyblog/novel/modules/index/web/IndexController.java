@@ -3,6 +3,9 @@ package www.ccyblog.novel.modules.index.web;
 import lombok.extern.log4j.Log4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.cache.RedisCacheManager;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Log4j
 @Controller
 public class IndexController {
+    @Autowired
+    RedisTemplate redisTemplate;
     @RequestMapping(value={"/index", "/", ""})
     public String showIndex(Model model){
         Subject currentUser = SecurityUtils.getSubject();

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
+<beans xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:util="http://www.springframework.org/schema/util"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd   http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
     <beans profile="dev">
         <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
             <property name="driverClassName">
@@ -16,6 +17,14 @@
             </property>
             <property name="password">
                 <value>123456</value>
+            </property>
+        </bean>
+
+        <bean id="prop" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+            <property name="locations">
+                <array>
+                    <value>classpath:app.properties</value>
+                </array>
             </property>
         </bean>
     </beans>
@@ -32,7 +41,16 @@
                 <value>root</value>
             </property>
             <property name="password">
-                <value>1111</value>
+                <value>hchc0815</value>
+            </property>
+        </bean>
+
+        <bean id="prop" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+            <!-- 这里是PropertiesFactoryBean类，它也有个locations属性，也是接收一个数组，跟上面一样 -->
+            <property name="locations">
+                <array>
+                    <value>classpath:app_dev.properties</value>
+                </array>
             </property>
         </bean>
     </beans>
@@ -51,6 +69,31 @@
         <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
             <property name="basePackage" value="www.ccyblog.novel" />
             <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+        </bean>
+
+
+        <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+            <property name="maxIdle" value="5" />
+            <property name="maxTotal" value="10"/>
+            <property name="testOnBorrow" value="true" />
+        </bean>
+
+        <bean id="redisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+            <property name="hostName" value="106.14.172.54"></property>
+            <property name="port" value="5551"></property>
+            <property name="password" value="12345678"></property>
+            <property name="poolConfig" ref="poolConfig"></property>
+            <property name="timeout" value="10000"></property>
+        </bean>
+
+
+
+        <bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+            <property name="connectionFactory" ref="redisConnectionFactory"></property>
+        </bean>
+
+        <bean id="redisCacheManager" class="org.springframework.data.redis.cache.RedisCacheManager">
+            <constructor-arg name="redisOperations" ref="redisTemplate"></constructor-arg>
         </bean>
 
         <!--<mvc:resources mapping="/resources/**" location="/resources/" />-->
@@ -96,7 +139,12 @@
 
         <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 
-        <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
+        <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor">
+            <!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   -->
+            <!-- 一定要注意这个选项， 必需要使用true,  要不然外部使用aop:aspectj-autoproxy时， 会导致被shiro注解的类，全部找不到， 并且没有任何报错-->
+            <!-- 卡了一整天， shiro的官方教程真是不靠谱 -->
+            <property name="proxyTargetClass" value="true"></property>
+        </bean>
         <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
             <property name="securityManager" ref="securityManager"/>
         </bean>
@@ -117,6 +165,38 @@
                 </props>
             </property>
         </bean>
+
+        <rabbit:connection-factory id="rabbitConnectionFactory"
+                                   host="106.14.172.54"
+                                   port="5673"
+                                   username="isghost"
+                                   password="12345678"/>
+        <rabbit:admin connection-factory="rabbitConnectionFactory"></rabbit:admin>
+        <rabbit:queue name="novel.alert.queue"></rabbit:queue>
+        <rabbit:fanout-exchange name="novel.fanout">
+            <rabbit:bindings>
+                <rabbit:binding queue="novel.alert.queue"></rabbit:binding>
+            </rabbit:bindings>
+        </rabbit:fanout-exchange>
+
+        <rabbit:template id="rabbitTemplate" connection-factory="rabbitConnectionFactory"
+            exchange="novel.fanout" routing-key="novel.alert.queue"/>
+
+        <rabbit:template id="rabbitTemplate2" connection-factory="rabbitConnectionFactory"
+                         exchange="novel.fanout" routing-key="novel.alert.queue"/>
+
+        <!--下面为接收方配置-->
+        <bean id="loginListener" class="www.ccyblog.novel.common.logs.Rabbit"></bean>
+
+        <rabbit:listener-container connection-factory="rabbitConnectionFactory">
+            <rabbit:listener ref="loginListener"
+                             method="handlerLoginAlert"
+                             queue-names="novel.alert.queue"/>
+
+        </rabbit:listener-container>
+
     </beans>
+
+
 
 </beans>

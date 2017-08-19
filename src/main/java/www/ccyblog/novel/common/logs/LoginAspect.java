@@ -1,8 +1,13 @@
 package www.ccyblog.novel.common.logs;
 
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.log4j.Log4j;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.session.Session;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -15,10 +20,22 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Component
 public class LoginAspect {
 
+    @Autowired
+    RabbitTemplate rabbitTemplate;
+
     // 不推荐使用创建切点的方式，因为idea的自动提示会消失，查找问题会比较麻烦
     @Before("execution (* www.ccyblog.novel.modules.account.web.AccountController.login(..)) && args(username, ..)")
     public void login(String username){
+        // 记录在本地
         log.info("username :" + username + " try to login");
+        // 发送给需要处理登录信息服务
+        Session session = SecurityUtils.getSubject().getSession();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("host", session.getHost());
+        jsonObject.put("startTimestamp", session.getStartTimestamp());
+        jsonObject.put("username", username);
+        jsonObject.put("lastAccessTime", session.getLastAccessTime());
+        rabbitTemplate.convertAndSend(jsonObject);
     }
 
     @Around("execution (* www.ccyblog.novel.modules.account.web.AccountController.login(..)) && args(username, ..)")

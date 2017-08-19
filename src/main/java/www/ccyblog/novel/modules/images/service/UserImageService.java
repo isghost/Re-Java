@@ -34,6 +34,7 @@ public class UserImageService {
     CloudStorageService cloudStorageService;
     //
     private final int PAGE_IMAGE_NUM = 20;
+    private final String IMAGE_BASE_URL = "http://res.ccyblog.com/";
 
     Pattern pattern = Pattern.compile("\\.[^\\.]*$");
 
@@ -153,7 +154,17 @@ public class UserImageService {
         int pageMax = (userCollection.size() - 1) / PAGE_IMAGE_NUM + 1;
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("imageUrl", collectionImageUrl);
-        jsonObject.put("baseUrl", "//res.ccyblog.com/");
+        jsonObject.put("baseUrl", IMAGE_BASE_URL);
+        jsonObject.put("maxPage", pageMax);
+        return jsonObject.toString();
+    }
+
+    public String getOtherUserImages(int page){
+        List<String> imageNames = userImageDao.recentImages((page - 1) * PAGE_IMAGE_NUM, PAGE_IMAGE_NUM);
+        int pageMax = userImageDao.getNum() / PAGE_IMAGE_NUM + 1;
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("imageUrl", imageNames);
+        jsonObject.put("baseUrl", IMAGE_BASE_URL);
         jsonObject.put("maxPage", pageMax);
         return jsonObject.toString();
     }

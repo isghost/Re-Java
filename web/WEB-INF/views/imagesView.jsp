@@ -13,6 +13,10 @@
 </head>
 <body>
     <div class="container">
+        <div style="margin: 30px;"></div>
+        <a href="/image/imageView?type=other"><button class="otherImage btn btn-primary btn-lg">最近漫友收藏</button></a>
+        <a href="/image/imageView?type=self"><button class="selfImage btn btn-primary btn-lg">我的收藏</button></a>
+        <div></div>
         <img src="" class="imageCeil" id="templetCeil">
         <div style="clear: both"></div>
         <nav aria-label="Page navigation" class="navigation">

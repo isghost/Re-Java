@@ -12,12 +12,12 @@
 </head>
 <%-- TODO 美化界面--%>
 <body>
-    <%--<form action="/images/upload1" method="post" enctype="multipart/form-data">--%>
+    <%--<form action="/image/upload1" method="post" enctype="multipart/form-data">--%>
         <%--<input id="fileupload1" type="file" name="image" multiple>--%>
         <%--<<input type="submit">>--%>
     <%--</form>--%>
     <div class="container">
-        <input id="fileupload" type="file" accept="image/*" name="image" data-url="/images/upload1" multiple>
+        <input id="fileupload" type="file" accept="image/*" name="image" data-url="/image/upload1" multiple>
         <div class="uploadWrapper">
 
         </div>
