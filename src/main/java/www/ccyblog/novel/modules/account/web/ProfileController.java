@@ -20,7 +20,7 @@ public class ProfileController {
     @Autowired
     private AccountService accountService;
 
-//    @RequiresRoles("user")
+    @RequiresRoles("user")
     @RequestMapping("/profile")
     public String showProfile(Model model){
         Session session = SecurityUtils.getSubject().getSession();
