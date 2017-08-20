@@ -22,7 +22,10 @@
         <div class="technology">
             <h3>本站使用的技术和框架</h3>
             <p>
-                Spring <span>Spring MVC</span> <span>Mybatis</span> <span>Mysql</span> <span>JCaptCha</span> <span>Shiro</span> <span>log4j</span> <span>lombok</span> <span>JQuery</span> <span>Bootstrap</span> <span>awosome-font</span>
+                Spring <span>Spring MVC</span> <span>Mybatis</span> <span>rabbitmq</span> <span>http_invoker</span>
+                <span>redis</span> <span>Mysql</span> <span>JCaptCha</span>
+                <span>Shiro</span> <span>log4j</span> <span>lombok</span> <span>JQuery</span> <span>Bootstrap</span>
+                <span>awosome-font</span>
             </p>
         </div>
     </div>

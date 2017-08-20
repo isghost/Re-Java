@@ -1,0 +1,43 @@
+body{
+    background: #fafafa ;
+/*url(/images/index_background.jpg);*/
+}
+.item{
+    width: 260px;
+    height: 300px;
+    background: #fafafa;
+    margin: 20px;
+    float: left;
+    border-radius: 20px;
+
+    transition-property: all;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
+    transition-delay: initial;
+}
+
+.item:hover{
+    transform: translate(0, -10px);
+    box-shadow: #e5e5e5 0px 5px 8px;
+}
+.icon{
+    text-align: center;
+}
+.icon > img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 10px auto;
+    display: inline-block;
+}
+
+.itemName > h1{
+    text-align: center;
+    color: #333333;
+}
+
+.itemDesc{
+    color: #b0b0b0;
+    font-size: 20px;
+    text-align: center;
+}
