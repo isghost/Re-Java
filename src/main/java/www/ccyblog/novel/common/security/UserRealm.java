@@ -23,9 +23,9 @@ import www.ccyblog.novel.modules.account.service.AccountService;
 
 /**
  * Created by isghost on 2017/8/6.
+ * 用户认证
  */
 public class UserRealm extends AuthorizingRealm{
-
 
 
     @Autowired
@@ -45,19 +45,11 @@ public class UserRealm extends AuthorizingRealm{
 
 
 
-    //    @Autowired
-    // 无法自动装配，因为Shiro使用的Realm并不是一个bean
-    private AccountService accountService = null;
-
     public boolean supports(AuthenticationToken authenticationToken) {
         return true;
     }
 
     public AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-        if(accountService == null){
-            WebApplicationContext currentWebApplicationContext = ContextLoader.getCurrentWebApplicationContext();
-            accountService = (AccountService)currentWebApplicationContext.getBean("accountService");
-        }
         String username = (String)authenticationToken.getPrincipal();
         String password = new String((char[])authenticationToken.getCredentials());
 //        accountService = ((UserAuthenticationToken)authenticationToken).getAccountService();

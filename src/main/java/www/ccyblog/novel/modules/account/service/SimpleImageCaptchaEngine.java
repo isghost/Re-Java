@@ -29,18 +29,21 @@ public class SimpleImageCaptchaEngine extends DefaultImageCaptchaEngine {
     }
 
     static {
-        WordGenerator randomWords = new RandomWordGenerator("012345679");
+        WordGenerator randomWords = new RandomWordGenerator("012345679"); // 验证码生成的字符
+        // 验证码颜色
         TextPaster randomPaster = new RandomTextPaster(4, 4, new RandomRangeColorGenerator(new int[]{126,255},new int[]{126,255}, new int[]{126,255}));
-
+        // 验证码背景色
         BackgroundGenerator funkyBack = new GradientBackgroundGenerator(
                 160,
                 80,
                 new RandomRangeColorGenerator(new int[]{0,125},new int[]{0,125}, new int[]{0,123}),
                 new RandomRangeColorGenerator(new int[]{0,125},new int[]{0,125}, new int[]{0,123})
         );
+        // 字体扭曲相关函数
         FontGenerator shearedFont = new TwistedAndShearedRandomFontGenerator(28, 34);
         WordToImage word2image = new ComposedWordToImage(shearedFont, funkyBack, randomPaster);
         factories = new ImageCaptchaFactory[1];
+        // 记录生成的工厂
         factories[0] = new GimpyFactory(randomWords, word2image);
     }
 }

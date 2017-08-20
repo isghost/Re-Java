@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Created by ccy on 2017/7/31.
+ * 404默认显示页面
  */
 @Log4j
 @Controller

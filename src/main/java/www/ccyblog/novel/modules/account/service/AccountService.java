@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 
 /**
  * Created by ccy on 2017/7/31.
+ * 帐号相关服务
  */
 @Service
 public class AccountService {
@@ -32,6 +33,9 @@ public class AccountService {
         OTHER
     }
 
+    /**
+     * 用户名匹配正则式
+     */
     private Pattern usernamePattern = null;
 
     public AccountService() {
@@ -39,6 +43,15 @@ public class AccountService {
     }
 
     // TODO 防止重名，虽然服务端，客户端都有判断，但还是会出错
+
+    /**
+     * 注册帐号
+     * @param username 用户名
+     * @param password 密码
+     * @param rePassword 重复密码
+     * @param captcha 验证码
+     * @return 注解结果状态
+     */
     public REGISTER_ERROR_INFO createAccount(String username, String password, String rePassword, String captcha){
         if(!jCaptchaService.validateResponseForID(request.getSession().getId(), captcha)){
             return REGISTER_ERROR_INFO.CAPTCHA;
@@ -64,9 +77,20 @@ public class AccountService {
         }
     }
 
+    /**
+     * 根据用户名查询帐号信息
+     * @param username 用户名
+     * @return 返回用户信息
+     */
     public Account getAccount(String username){
         return accountDao.getAccount(username);
     }
+
+    /**
+     * 查询是否存在用户
+     * @param username 用户名
+     * @return 是否存在
+     */
     public Boolean hasUsername(String username){
         if(getAccount(username) != null){
             return true;

@@ -44,7 +44,12 @@ public class CloudStorageService {
 
     }
 
-
+    /**
+     * 上传图片到腾讯云
+     * @param fileName 文件名
+     * @param contentBuffer 图片信息
+     * @return 结果信息
+     */
     public String uploadFileToCloud(String fileName, byte[] contentBuffer){
         UploadFileRequest uploadFileRequest = new UploadFileRequest(bucketName, "/" + fileName, contentBuffer);
         return  cosClient.uploadFile(uploadFileRequest);

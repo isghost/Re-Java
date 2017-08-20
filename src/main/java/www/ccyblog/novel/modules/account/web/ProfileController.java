@@ -13,6 +13,7 @@ import www.ccyblog.novel.modules.account.service.AccountService;
 
 /**
  * Created by isghost on 2017/8/6.
+ * 用户个人信息
  */
 @Log4j
 @Controller
@@ -20,6 +21,11 @@ public class ProfileController {
     @Autowired
     private AccountService accountService;
 
+    /**
+     * 显示用户信息
+     * @param model
+     * @return
+     */
     @RequiresRoles("user")
     @RequestMapping("/profile")
     public String showProfile(Model model){

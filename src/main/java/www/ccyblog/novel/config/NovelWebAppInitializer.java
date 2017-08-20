@@ -7,6 +7,7 @@ import javax.servlet.ServletRegistration;
 
 /**
  * Created by Administrator on 2017/7/16.
+ * spring mvc 初始化类
  */
 public class NovelWebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     protected Class<?>[] getRootConfigClasses() {

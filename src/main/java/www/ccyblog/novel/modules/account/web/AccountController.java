@@ -33,6 +33,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
  * Created by ccy on 2017/7/31.
+ * 帐号Controller
  */
 //TODO 完成授权
 @Log4j
@@ -45,19 +46,24 @@ public class AccountController {
     @Autowired
     private JCaptchaService jCaptchaService;
 
+    /**
+     * 显示注册表单
+     * @return 视图名称
+     */
     @RequestMapping(value = "/register", method = GET)
     public String registerForm(){
-//        Subject currentUser = SecurityUtils.getSubject();
-//        UsernamePasswordToken usernamePasswordToken = new UserAuthenticationToken("isghost2", "hchc0815", accountService);
-//        try{
-//            currentUser.login(usernamePasswordToken);
-//            usernamePasswordToken.setRememberMe(true);
-//        }catch (AuthenticationException e){
-//            return "index";
-//        }
         return "register";
     }
 
+    /**
+     * 提交注册
+     * @param username 用户名
+     * @param password 密码
+     * @param rePassword 重复用户名
+     * @param captcha 验证码
+     * @param model model
+     * @return 视图名称
+     */
     @RequestMapping(value = "/register", method = POST)
     public String registerAccount(@RequestParam(value = "username",defaultValue = "") String username ,
                                   @RequestParam(value = "password",defaultValue = "") String password ,
@@ -76,6 +82,12 @@ public class AccountController {
         }
     }
 
+    /**
+     * 获取验证码图
+     * @param httpServletRequest
+     * @param httpServletResponse
+     * @throws IOException
+     */
     @RequestMapping(value="/captcha.jpeg")
     public void getJCaptcha(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
         byte[] captchaChallengeAsJpeg = null;
@@ -133,11 +145,23 @@ public class AccountController {
         }
     }
 
+    /**
+     * 显示登录表单
+     * @param model
+     * @return 视图名称
+     */
     @RequestMapping(value = "/login", method = GET)
     public String showLoginForm(Model model){
         return "login";
     }
 
+    /**
+     * 提交登录
+     * @param username 用户名
+     * @param password 密码
+     * @param model
+     * @return 视图名称
+     */
     @RequestMapping(value="/login", method = POST)
     public String login(@RequestParam String username, @RequestParam String password, RedirectAttributes model){
         Subject currentUser = SecurityUtils.getSubject();
@@ -152,6 +176,11 @@ public class AccountController {
         return "redirect:/";
     }
 
+    /**
+     * 查询用户名是否存在
+     * @param username 用户名
+     * @return 是否存在
+     */
     //《sping in action》没有提示依赖哪些库，尝试一下午，终于确定是jackson-core 和 jackson-databind
     @RequestMapping(value="/query.json", method = POST)
     public @ResponseBody Map queryUsername(@RequestParam(value = "username") String username){
@@ -161,11 +190,19 @@ public class AccountController {
         return hashMap;
     }
 
+    /**
+     * 显示条款
+     * @return
+     */
     @RequestMapping(value="/terms")
     public String getTerms(){
         return "terms";
     }
 
+    /**
+     * 退出登录
+     * @return 首页视图名称
+     */
     @RequestMapping(value="/logout")
     public String logout(){
         Subject currentUser = SecurityUtils.getSubject();

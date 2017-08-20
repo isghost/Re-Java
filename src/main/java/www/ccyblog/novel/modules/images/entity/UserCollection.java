@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 /**
  * Created by isghost on 2017/8/12.
+ * 用户收集实体
  */
 @Data
 public class UserCollection {

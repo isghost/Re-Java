@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Created by isghost on 2017/8/16.
+ * 登录相关的日志记录，以及消息发送
  */
 @Log4j
 @Aspect

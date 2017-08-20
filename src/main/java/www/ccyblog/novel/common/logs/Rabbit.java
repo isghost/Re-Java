@@ -5,6 +5,7 @@ import lombok.extern.log4j.Log4j;
 
 /**
  * Created by isghost on 2017/8/17.
+ * 登录消息接收
  */
 @Log4j
 public class Rabbit {

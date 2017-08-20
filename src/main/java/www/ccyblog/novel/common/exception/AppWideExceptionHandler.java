@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartException;
 
 /**
  * Created by ccy on 2017/7/20.
+ * 所有异常的统一处理
  */
 
 @ControllerAdvice

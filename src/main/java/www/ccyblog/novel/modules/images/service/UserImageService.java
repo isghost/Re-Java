@@ -20,6 +20,7 @@ import java.util.regex.Pattern;
 
 /**
  * Created by isghost on 2017/8/12.
+ * 用户图片和收藏的服务
  */
 @Log4j
 @Service
@@ -159,6 +160,11 @@ public class UserImageService {
         return jsonObject.toString();
     }
 
+    /**
+     * 获得所有收藏的图片信息
+     * @param page 页数
+     * @return 图片信息
+     */
     public String getOtherUserImages(int page){
         List<String> imageNames = userImageDao.recentImages((page - 1) * PAGE_IMAGE_NUM, PAGE_IMAGE_NUM);
         int pageMax = userImageDao.getNum() / PAGE_IMAGE_NUM + 1;

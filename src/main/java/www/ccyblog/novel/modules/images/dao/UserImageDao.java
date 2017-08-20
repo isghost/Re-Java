@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Created by isghost on 2017/8/12.
+ * 用户图片DAO
  */
 @Repository
 public interface UserImageDao {

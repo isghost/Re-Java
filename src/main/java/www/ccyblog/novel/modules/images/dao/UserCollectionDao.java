@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 /**
  * Created by isghost on 2017/8/12.
+ * 用户收藏DAO
  */
 @Repository
 public interface UserCollectionDao {

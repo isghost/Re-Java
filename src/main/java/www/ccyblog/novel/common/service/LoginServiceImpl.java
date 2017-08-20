@@ -9,6 +9,7 @@ import www.ccyblog.novel.modules.account.service.AccountService;
 
 /**
  * Created by isghost on 2017/8/19.
+ * rmi login implements
  */
 @Service
 @Qualifier("loginServiceServer")

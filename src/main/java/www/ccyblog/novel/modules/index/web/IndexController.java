@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Created by ccy on 2017/7/31.
+ * 首页
  */
 @Log4j
 @Controller

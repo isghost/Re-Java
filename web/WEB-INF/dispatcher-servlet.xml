@@ -24,6 +24,7 @@
             <property name="locations">
                 <array>
                     <value>classpath:app_dev.properties</value>
+                    <value>classpath:rabbitmq-config.properties</value>
                 </array>
             </property>
         </bean>
@@ -50,6 +51,7 @@
             <property name="locations">
                 <array>
                     <value>classpath:app.properties</value>
+                    <value>classpath:rabbitmq-config.properties</value>
                 </array>
             </property>
         </bean>
@@ -167,10 +169,10 @@
         </bean>
 
         <rabbit:connection-factory id="rabbitConnectionFactory"
-                                   host="106.14.172.54"
-                                   port="5673"
+                                   host="${mq.host}"
+                                   port="${mq.port}"
                                    username="isghost"
-                                   password="12345678"/>
+                                   password="${mq.password}"/>
         <rabbit:admin connection-factory="rabbitConnectionFactory"></rabbit:admin>
         <rabbit:queue name="novel.alert.queue"></rabbit:queue>
         <rabbit:fanout-exchange name="novel.fanout">

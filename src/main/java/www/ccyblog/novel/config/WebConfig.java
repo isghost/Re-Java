@@ -18,11 +18,11 @@ import java.io.IOException;
 
 /**
  * Created by Administrator on 2017/7/16.
+ * spring mvc的初始化
  */
 @Configuration
 @EnableWebMvc
 @ComponentScan("www.ccyblog.novel")
-@ImportResource("WEB-INF/applicationContext.xml")
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @EnableCaching
 @Log4j

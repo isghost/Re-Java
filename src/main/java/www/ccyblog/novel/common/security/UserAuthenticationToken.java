@@ -5,6 +5,7 @@ import www.ccyblog.novel.modules.account.service.AccountService;
 
 /**
  * Created by isghost on 2017/8/6.
+ *
  */
 public class UserAuthenticationToken extends UsernamePasswordToken {
     private AccountService accountService;

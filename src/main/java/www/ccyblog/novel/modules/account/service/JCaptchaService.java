@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * Created by ccy on 2017/8/3.
+ * 验证码服务
  */
 @Service
 public class JCaptchaService extends DefaultManageableImageCaptchaService {

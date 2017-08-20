@@ -13,6 +13,7 @@ import java.util.Properties;
 
 /**
  * Created by isghost on 2017/8/19.
+ * rmi 配置文件
  */
 @Configuration
 public class RMIServerConfig {

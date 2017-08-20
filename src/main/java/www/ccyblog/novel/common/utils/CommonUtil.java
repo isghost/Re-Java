@@ -4,6 +4,7 @@ import java.util.Random;
 
 /**
  * Created by ccy on 2017/7/31.
+ * 能用工具类
  */
 public class CommonUtil {
     /**
