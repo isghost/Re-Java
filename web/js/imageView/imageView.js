@@ -33,10 +33,10 @@ function showImage(result){
     let baseUrl = result["baseUrl"];
     let imageUrl = result["imageUrl"];
     for(let i = 0;i<imageUrl.length;i++){
-        $("#templetCeil").clone().insertBefore("#templetCeil")
+        $("#imageWrapperID").clone().insertBefore("#imageWrapperID")
+            .attr("id", "imageWrapperID" + i)
             .css("display", "inline-block")
-            .attr("src", baseUrl + imageUrl[i])
-            .attr("id", "ceil" + i)
+            .find(".imageCeil").attr("src", baseUrl + imageUrl[i]);
     }
 }
 

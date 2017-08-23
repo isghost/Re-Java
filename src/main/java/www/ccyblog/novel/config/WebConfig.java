@@ -45,7 +45,6 @@ public class WebConfig extends WebMvcConfigurerAdapter{
 
     @Bean
     MultipartResolver multipartResolver() throws IOException{
-
         return new StandardServletMultipartResolver();
     }
 

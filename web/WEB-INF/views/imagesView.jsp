@@ -19,7 +19,24 @@
         <a href="/image/imagesUpload"><button class="selfImage btn btn-primary btn-lg">上传图片</button></a>
         <p style="text-align: center" id="loading"><i class="fa fa-spinner fa-spin fa-2x fa-fw "></i>加载中...</p>
         <div></div>
-        <img src="" class="imageCeil" id="templetCeil">
+        <div class="imageContainer">
+            <div class="imageWrapper" id="imageWrapperID">
+                <img src="" class="imageCeil" id="templetCeil">
+                <div class="imageDesc">
+                    <div class="imageHeader">
+                        <div class="collection">
+                            <span>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="imageBottom">
+                        <span class="imageName">未命名</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
         <div style="clear: both"></div>
         <nav aria-label="Page navigation" class="navigation">
             <ul class="pagination">
@@ -37,6 +54,7 @@
             </ul>
         </nav>
     </div>
+
 <%@include file="footer.jsp" %>
     <script src="/js/imageView/imageView.js"></script>
 </body>
