@@ -15,6 +15,7 @@ import java.util.List;
 public interface UserImageDao {
     int insert(UserImage userImage);
     List<String> select(List<Long> list);
+    Integer selectOne(String imageName);
     List<String> recentImages(@Param("begin") int begin, @Param("num") int num);
     int getNum();
 //    List<String> recentImages(int begin, int num);

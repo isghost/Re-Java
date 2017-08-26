@@ -14,13 +14,16 @@
 <body>
     <div class="container">
         <div style="margin: 30px;"></div>
-        <a href="/image/imageView?type=other"><button class="otherImage btn btn-primary btn-lg">最近漫友收藏</button></a>
+        <a href="/image/otherImageView?type=other"><button class="otherImage btn btn-primary btn-lg">最近漫友收藏</button></a>
         <a href="/image/imageView?type=self"><button class="selfImage btn btn-primary btn-lg">我的收藏</button></a>
         <a href="/image/imagesUpload"><button class="selfImage btn btn-primary btn-lg">上传图片</button></a>
-        <p style="text-align: center" id="loading"><i class="fa fa-spinner fa-spin fa-2x fa-fw "></i>加载中...</p>
+        <p style="text-align: center" id="loading"><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>加载中...</p>
         <div></div>
         <div class="imageContainer">
             <div class="imageWrapper" id="imageWrapperID">
+                <div id="loading-center-releative">
+                    <div id="object"></div>
+                </div>
                 <img src="" class="imageCeil" id="templetCeil">
                 <div class="imageDesc">
                     <div class="imageHeader">

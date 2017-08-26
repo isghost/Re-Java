@@ -15,7 +15,7 @@
 
 .item:hover{
     transform: translate(0, -10px);
-    box-shadow: #e5e5e5 0px 5px 8px;
+    box-shadow: #909090 0px 5px 8px;
 }
 .icon{
     text-align: center;

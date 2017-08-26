@@ -15,6 +15,7 @@
 <body>
     <div class="container" >
         <h1 style="text-align: center">轻说网</h1>
+        <h6 style="text-align: right">狗群友要的五光十色背景</h6>
         <div class="item" style="background-color: #aeabd8">
             <a href="/profile">
                 <div class="icon"><img src="/images/A.jpg" alt=""></div>
@@ -22,13 +23,13 @@
             <div class="itemName"><h1>个人信息</h1></div>
             <div class="itemDesc">查看用户ID，帐号名称，加密盐</div>
         </div>
-        <div class="item" style="background-color: #d2a689" >
-            <a href="/subpage">
-                <div class="icon"><img src="/images/D.jpg" alt=""></div>
-            </a>
-            <div class="itemName"><h1>普通页面</h1></div>
-            <div class="itemDesc">不需要登录就能直接访问</div>
-        </div>
+        <%--<div class="item" style="background-color: #d2a689" >--%>
+            <%--<a href="/subpage">--%>
+                <%--<div class="icon"><img src="/images/D.jpg" alt=""></div>--%>
+            <%--</a>--%>
+            <%--<div class="itemName"><h1>普通页面</h1></div>--%>
+            <%--<div class="itemDesc">不需要登录就能直接访问</div>--%>
+        <%--</div>--%>
 
         <div class="item" style="background-color: #ded2c2">
             <a href="/account/login">
@@ -39,13 +40,13 @@
         </div>
         <div class="item" style="background-color: #dadfe3">
             <a href="/account/register">
-                <div class="icon"><img src="/images/S.jpg" alt=""></div>
+                <div class="icon"><img src="/images/icons/dd.jpg" alt=""></div>
             </a>
             <div class="itemName"><h1>注册</h1></div>
             <div class="itemDesc">用户注册，新增验证码功能</div>
         </div>
         <div class="item" style="background-color: #f1f1f1">
-            <a href="/image/imageView">
+            <a href="/image/otherImageView">
                 <div class="icon"><img src="/images/icons/aa.jpg" alt=""></div>
             </a>
             <div class="itemName"><h1>图片浏览</h1></div>

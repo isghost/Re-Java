@@ -17,6 +17,9 @@
 ## 运行
 [详细流程](https://github.com/isghost/Re-Novel/blob/master/RUN.md)
 
+## 讨论群
+QQ:550479981 加群请备注来源
+
 ## 相关技术
 #### 后端
 * `spring`

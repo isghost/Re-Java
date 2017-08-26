@@ -5,7 +5,6 @@
 <configuration>
 
 
-
     <settings>
         <!-- Globally enables or disables any caches configured in any mapper under this configuration -->
         <setting name="cacheEnabled" value="true"/>
@@ -34,6 +33,10 @@
             <!--</dataSource>-->
         <!--</environment>-->
     <!--</environments>-->
+    <plugins>
+        <plugin interceptor="www.ccyblog.novel.common.Interceptor.LogStatementInterceptor">
+        </plugin>
+    </plugins>
 
     <mappers>
         <!--<mapper resource="classpath*:mappings/modules/register/Account.xml"/>-->
@@ -41,5 +44,7 @@
         <mapper resource="mappings/modules/userImages/UserImage.xml"/>
         <mapper resource="mappings/modules/userImages/UserCollectionDao.xml"/>
     </mappers>
+
+
 
 </configuration>

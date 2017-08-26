@@ -106,6 +106,15 @@ public class UserImageService {
         return true;
     }
 
+    public boolean addUserCollection(String imageName){
+        Integer imageId = userImageDao.selectOne(imageName);
+        if(imageId != null){
+            addUserCollection(imageId);
+            return true;
+        }
+        return false;
+    }
+
     /**
      * 获得用户所有图片收藏信息
      * @return 图片ID集合

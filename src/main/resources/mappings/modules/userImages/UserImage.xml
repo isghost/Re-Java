@@ -22,4 +22,7 @@
     <select id="getNum" resultType="java.lang.Integer">
         select count(*) from userimage
     </select>
+    <select id="selectOne" resultType="java.lang.Integer">
+        select imageid from userimage where fileName = #{imageName} limit 1
+    </select>
 </mapper>

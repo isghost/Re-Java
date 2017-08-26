@@ -53,6 +53,14 @@
     transition-delay: initial;
 }
 
+.imageContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: flex-start;
+}
 .imageWrapper:hover .imageBottom{
     bottom:0px;
 }
@@ -87,4 +95,38 @@
 
 .collection:hover i{
     color: yellow;
+}
+
+
+#object{
+    width: 80px;
+    height: 80px;
+    background-image: linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%);
+    position: absolute;
+    -webkit-animation: animate 1s infinite ease-in-out;
+    animation: animate 1s infinite ease-in-out;
+    left: 60px;
+    top: 35px;
+}
+@-webkit-keyframes animate {
+    0% { -webkit-transform: perspective(160px); }
+    50% { -webkit-transform: perspective(160px) rotateY(-180deg); }
+    100% { -webkit-transform: perspective(160px) rotateY(-180deg) rotateX(-180deg); }
+}
+
+@keyframes animate {
+    0% {
+        transform: perspective(160px) rotateX(0deg) rotateY(0deg);
+        -webkit-transform: perspective(160px) rotateX(0deg) rotateY(0deg);
+    } 50% {
+          transform: perspective(160px) rotateX(-180deg) rotateY(0deg);
+          -webkit-transform: perspective(160px) rotateX(-180deg) rotateY(0deg) ;
+      } 100% {
+            transform: perspective(160px) rotateX(-180deg) rotateY(-180deg);
+            -webkit-transform: perspective(160px) rotateX(-180deg) rotateY(-180deg);
+        }
+}
+
+#loading-center-releative{
+    position: relative;
 }

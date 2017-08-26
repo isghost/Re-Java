@@ -45,6 +45,21 @@ public class ImagesController {
     }
 
     /**
+     * 收藏图片
+     * @param imageName 图片名称
+     * @return
+     */
+    @RequestMapping("/collectionImage.json")
+    @RequiresRoles("user")
+    public @ResponseBody Map collectionImage(@RequestParam String imageName){
+        HashMap<String, Boolean> hashMap = new HashMap<String, Boolean>();
+        boolean result = userImageService.addUserCollection(imageName);
+        hashMap.put(imageName, result);
+        hashMap.put("flag", result);
+        return hashMap;
+    }
+
+    /**
      * 显示图片上传界面
      * @return 上传图片的视图名称
      */
@@ -70,7 +85,7 @@ public class ImagesController {
      * @param pageNum 页数
      * @return 图片信息
      */
-    @RequiresRoles("user")
+//    @RequiresRoles("user")
     @RequestMapping("/otherCollection.json")
     @Cacheable(value = IMAGE_INFO_CACHE_NAME, key = "#pageNum")
     public @ResponseBody String getOtherUserImages(@RequestParam(defaultValue = "1")int pageNum){
@@ -84,6 +99,15 @@ public class ImagesController {
     @RequiresRoles("user")
     @RequestMapping("/imageView")
     public String showImageView(){
+        return "imagesView";
+    }
+
+    /**
+     * 图片浏览界面
+     * @return 图片浏览视图名称
+     */
+    @RequestMapping("/otherImageView")
+    public String showOtherImageView(){
         return "imagesView";
     }
 }

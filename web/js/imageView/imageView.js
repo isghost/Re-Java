@@ -32,11 +32,41 @@ function fillPage(result){
 function showImage(result){
     let baseUrl = result["baseUrl"];
     let imageUrl = result["imageUrl"];
+    if(window.location.href.match("/imageView")){
+        $("#imageWrapperID").find(".imageHeader").css("display", "none");
+    }
     for(let i = 0;i<imageUrl.length;i++){
-        $("#imageWrapperID").clone().insertBefore("#imageWrapperID")
+        let imageWrapper = $("#imageWrapperID").clone()
+        imageWrapper.insertBefore("#imageWrapperID")
             .attr("id", "imageWrapperID" + i)
             .css("display", "inline-block")
             .find(".imageCeil").attr("src", baseUrl + imageUrl[i]);
+        let tmpImg = new Image() ;
+        tmpImg.src = baseUrl + imageUrl[i];
+        tmpImg.onload = function() {
+            imageWrapper.find("#loading-center-releative").css("display", "none");
+        };
+
+        imageWrapper.find(".collection").click(function(){
+            $.ajax({
+                type: "POST",
+                data: "imageName=" + imageUrl[i],
+                url: "/image/collectionImage.json",
+                success: function(result){
+                    if(typeof(result) != 'object'){
+                        window.location.href = "/account/login";
+                    }
+                    else{
+                        imageWrapper.find(".collection").css("color", "yellow");
+                        layer.tips('已经收藏，请到个人收藏查看', '#imageWrapperID' + i, {
+                            tips: [1, '#3595CC'],
+                            time: 4000
+                        });
+                    }
+                    console.log(result);
+                }
+            })
+        })
     }
 }
 
