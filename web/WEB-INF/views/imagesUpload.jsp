@@ -12,10 +12,7 @@
 </head>
 <%-- TODO 美化界面--%>
 <body>
-    <%--<form action="/image/upload1" method="post" enctype="multipart/form-data">--%>
-        <%--<input id="fileupload1" type="file" name="image" multiple>--%>
-        <%--<<input type="submit">>--%>
-    <%--</form>--%>
+
     <div class="container">
         <a href="/image/imageView" ><button class="selfImage btn btn-primary btn-lg" style="margin: 30px">查看收藏图片</button></a>
         <input id="fileupload" type="file" accept="image/*" name="image" data-url="/image/upload1" multiple>

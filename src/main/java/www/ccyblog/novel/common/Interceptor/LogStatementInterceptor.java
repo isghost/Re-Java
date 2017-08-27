@@ -37,18 +37,18 @@ public class LogStatementInterceptor implements Interceptor{
 
     Properties properties = null;
     public Object intercept(Invocation invocation) throws Throwable {
-        log.error("intercept intercept");
+//        log.error("intercept intercept");
         Object obj = invocation.proceed();
         return obj;
     }
 
     public Object plugin(Object o) {
-        log.error("intercept plugin");
+//        log.error("intercept plugin");
         return Plugin.wrap(o, this);
     }
 
     public void setProperties(Properties properties) {
-        log.error("intercept setProerties");
+//        log.error("intercept setProerties");
         this.properties = properties;
     }
 }

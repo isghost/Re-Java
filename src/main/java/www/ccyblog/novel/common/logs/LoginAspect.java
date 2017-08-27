@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalTime;
+
 /**
  * Created by isghost on 2017/8/16.
  * 登录相关的日志记录，以及消息发送
@@ -33,10 +35,10 @@ public class LoginAspect {
         Session session = SecurityUtils.getSubject().getSession();
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("host", session.getHost());
-        jsonObject.put("startTimestamp", session.getStartTimestamp());
+        jsonObject.put("startTimestamp", session.getStartTimestamp().toString());
         jsonObject.put("username", username);
-        jsonObject.put("lastAccessTime", session.getLastAccessTime());
-        rabbitTemplate.convertAndSend(jsonObject);
+        jsonObject.put("lastAccessTime", session.getStartTimestamp().toString());
+        rabbitTemplate.convertAndSend("novel.fanout", "", jsonObject);
     }
 
     @Around("execution (* www.ccyblog.novel.modules.account.web.AccountController.login(..)) && args(username, ..)")

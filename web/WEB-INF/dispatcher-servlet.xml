@@ -175,27 +175,30 @@
                                    password="${mq.password}"/>
         <rabbit:admin connection-factory="rabbitConnectionFactory"></rabbit:admin>
         <rabbit:queue name="novel.alert.queue"></rabbit:queue>
+        <rabbit:queue name="novel.alert.queue.uploadImage"></rabbit:queue>
+
         <rabbit:fanout-exchange name="novel.fanout">
-            <rabbit:bindings>
-                <rabbit:binding queue="novel.alert.queue"></rabbit:binding>
-            </rabbit:bindings>
         </rabbit:fanout-exchange>
 
-        <rabbit:template id="rabbitTemplate" connection-factory="rabbitConnectionFactory"
-            exchange="novel.fanout" routing-key="novel.alert.queue"/>
+        <rabbit:direct-exchange name="novel.direct">
+            <rabbit:bindings>
+                <rabbit:binding queue="novel.alert.queue.uploadImage"></rabbit:binding>
+            </rabbit:bindings>
+        </rabbit:direct-exchange>
 
-        <rabbit:template id="rabbitTemplate2" connection-factory="rabbitConnectionFactory"
-                         exchange="novel.fanout" routing-key="novel.alert.queue"/>
+        <rabbit:template id="rabbitTemplate" connection-factory="rabbitConnectionFactory"
+            />
+
 
         <!--下面为接收方配置-->
-        <bean id="loginListener" class="www.ccyblog.novel.common.logs.Rabbit"></bean>
+        <!--<bean id="loginListener" class="www.ccyblog.novel.common.logs.Rabbit"></bean>-->
 
-        <rabbit:listener-container connection-factory="rabbitConnectionFactory">
-            <rabbit:listener ref="loginListener"
-                             method="handlerLoginAlert"
-                             queue-names="novel.alert.queue"/>
+        <!--<rabbit:listener-container connection-factory="rabbitConnectionFactory">-->
+            <!--<rabbit:listener ref="loginListener"-->
+                             <!--method="handlerLoginAlert"-->
+                             <!--queue-names="novel.alert.queue"/>-->
 
-        </rabbit:listener-container>
+        <!--</rabbit:listener-container>-->
 
         <bean id="loginServiceClient" class="org.springframework.remoting.httpinvoker.HttpInvokerProxyFactoryBean" >
             <property name="serviceUrl" value="${loginServiceUrl}/login.service"></property>

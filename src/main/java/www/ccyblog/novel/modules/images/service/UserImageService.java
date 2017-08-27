@@ -72,6 +72,10 @@ public class UserImageService {
         if(matcher.find()){
             newFileName += matcher.group();
         }
+        Integer imageIdOld = userImageDao.selectOne(newFileName);
+        if(imageIdOld != null){
+            return addUserCollection(imageIdOld);
+        }
         String result = cloudStorageService.uploadFileToCloud(newFileName, contentBuffer);
         JSONObject jsonObject = JSONObject.parseObject(result);
         int code = jsonObject.getInteger("code");
@@ -96,7 +100,7 @@ public class UserImageService {
             return true;
         }
         try {
-            arrayList.add(imageId);
+            arrayList.add(0, imageId);
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             new ObjectOutputStream(byteArrayOutputStream).writeObject(arrayList);
             userCollectionDao.update(new UserCollection(account.getUid(), byteArrayOutputStream.toByteArray()));

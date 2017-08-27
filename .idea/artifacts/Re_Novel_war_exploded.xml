@@ -8,8 +8,6 @@
           <element id="module-output" name="Re-Novel" />
         </element>
         <element id="directory" name="lib">
-          <element id="library" level="project" name="Spring-4.3.9.RELEASE" />
-          <element id="library" level="project" name="Spring MVC-4.3.9.RELEASE" />
           <element id="library" level="project" name="Maven: jstl:jstl:1.2" />
           <element id="library" level="project" name="Maven: junit:junit:4.12" />
           <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.0" />
