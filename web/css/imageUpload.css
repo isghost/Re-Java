@@ -1,0 +1,61 @@
+
+.uploadWrapper{
+    border-style: dashed;
+    border-color: #dde0e7;
+    width: 700px;
+    height: 300px;
+    margin: auto;
+    text-align: center;
+}
+
+.fileInput-button{
+    margin: 50px auto;
+    display: block;
+    width: 200px;
+}
+
+.uploadTip{
+    font-size: 18px;
+}
+
+.uploadTip2{
+    color: #a0a050;
+}
+
+.uploadWarn{
+    margin-top: 80px;
+    color: #a0a050;
+}
+
+.imageUploadStatus{
+    width: 700px;
+    margin: auto;
+}
+
+.statusItem{
+    flex-direction: row;
+    align-items: center;
+    width: 700px;
+    height: 100px;
+    display: none;
+    margin-top: 5px;
+    border-style: dotted;
+    border-color: #a0a0a0
+;
+
+}
+.statusItem > img{
+    width: 200px;
+    height: 100px;
+}
+
+.imageName{
+    color: #505050;
+    margin: 10px;
+    font-size: 20px;
+}
+
+.imageStatusDesc{
+    color: #0acffe;
+    font-size: 20px;
+}

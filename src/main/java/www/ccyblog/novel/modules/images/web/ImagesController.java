@@ -37,9 +37,16 @@ public class ImagesController {
     @RequiresRoles("user")
     @CacheEvict(value = IMAGE_INFO_CACHE_NAME, allEntries = true)
     public @ResponseBody Map uploadFile(@RequestPart MultipartFile image){
-        HashMap<String, Boolean> hashMap = new HashMap<String, Boolean>();
-        boolean result = userImageService.saveImage(image);
-        hashMap.put(image.getOriginalFilename(), result);
+        HashMap<String, String> hashMap = new HashMap<String, String>();
+        String imageUrl = userImageService.saveImage(image);
+        hashMap.put("originalName", image.getOriginalFilename());
+        if(imageUrl != null){
+            hashMap.put("result", "true");
+            hashMap.put("imageUrl", imageUrl);
+        }
+        else{
+            hashMap.put("result", "false");
+        }
 
         return hashMap;
     }

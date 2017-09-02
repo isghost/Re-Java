@@ -57,14 +57,14 @@ public class UserImageService {
      * @param multipartFile 图片请求的原始对象
      * @return 是否成功
      */
-    public boolean saveImage(MultipartFile multipartFile){
+    public String saveImage(MultipartFile multipartFile){
         byte [] contentBuffer;
         try {
             contentBuffer = multipartFile.getBytes();
         } catch (IOException e) {
             log.error("multipartFile getBytes error");
             e.printStackTrace();
-            return false;
+            return null;
         }
         String newFileName = new Md5Hash(contentBuffer).toString();
         String fileName = multipartFile.getOriginalFilename();
@@ -74,18 +74,23 @@ public class UserImageService {
         }
         Integer imageIdOld = userImageDao.selectOne(newFileName);
         if(imageIdOld != null){
-            return addUserCollection(imageIdOld);
+            if(addUserCollection(imageIdOld)){
+                return IMAGE_BASE_URL + newFileName;
+            }
         }
         String result = cloudStorageService.uploadFileToCloud(newFileName, contentBuffer);
         JSONObject jsonObject = JSONObject.parseObject(result);
         int code = jsonObject.getInteger("code");
         if (code == 0){
             long imageId = addImageInfo(newFileName);
-            return addUserCollection(imageId);
+            if(addUserCollection(imageId)){
+                return IMAGE_BASE_URL + newFileName;
+            }
         }
         else{
-            return false;
+            return null;
         }
+        return null;
     }
 
     /**
