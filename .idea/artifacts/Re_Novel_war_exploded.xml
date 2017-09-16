@@ -79,6 +79,8 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.3.10.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.3.10.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-tx:4.3.10.RELEASE" />
+          <element id="library" level="project" name="Maven: com.squareup.okhttp3:okhttp:3.4.1" />
+          <element id="library" level="project" name="Maven: com.squareup.okio:okio:1.9.0" />
         </element>
       </element>
     </root>

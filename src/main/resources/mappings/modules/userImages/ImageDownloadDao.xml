@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="www.ccyblog.novel.modules.images.dao.ImageDownloadDao">
+    <insert id="insert" parameterType="www.ccyblog.novel.modules.images.entity.ImageDownloadInfo" useGeneratedKeys="true">
+        insert into imagedownload(imageurl, author, status) values(#{String}, #{uid}, #{status})
+        <selectKey keyProperty="imageid" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+    </insert>
+    <update id="update" parameterType="www.ccyblog.novel.modules.images.entity.ImageDownloadInfo" >
+        update imagedownload set status = #{status} where id = #{id}
+    </update>
+
+    <resultMap id="imageDownloadResultMap" type="www.ccyblog.novel.modules.images.entity.ImageDownloadInfo">
+        <id property="id" column="id"></id>
+        <id property="imageUrl" column="imageurl"></id>
+        <id property="uid" column="uid"></id>
+        <id property="status" column="status"></id>
+    </resultMap>
+    <select id="getInfoById" resultMap="imageDownloadResultMap">
+        select id, imageurl, author, status from imagedownload where id = #{id}
+    </select>
+</mapper>
