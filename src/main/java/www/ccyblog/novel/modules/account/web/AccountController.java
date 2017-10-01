@@ -1,8 +1,6 @@
 package www.ccyblog.novel.modules.account.web;
 
 import com.octo.captcha.service.CaptchaServiceException;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
 import lombok.extern.log4j.Log4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -11,13 +9,16 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import www.ccyblog.novel.common.security.UserAuthenticationToken;
 import www.ccyblog.novel.modules.account.service.AccountService;
 import www.ccyblog.novel.modules.account.service.AccountService.REGISTER_ERROR_INFO;
 import www.ccyblog.novel.modules.account.service.JCaptchaService;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -102,12 +103,10 @@ public class AccountController {
             BufferedImage challenge =
                     jCaptchaService.getImageChallengeForID(captchaId,
                             httpServletRequest.getLocale());
+            ByteArrayOutputStream byteArrayInputStream = new ByteArrayOutputStream();
 
-            // jpeg编码器
-
-            JPEGImageEncoder jpegEncoder =
-                    JPEGCodec.createJPEGEncoder(jpegOutputStream);
-            jpegEncoder.encode(challenge);
+            ImageIO.write(challenge, "jpeg", byteArrayInputStream);
+            captchaChallengeAsJpeg = byteArrayInputStream.toByteArray();
 
         } catch (IllegalArgumentException e) {
             try {
@@ -126,8 +125,6 @@ public class AccountController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        captchaChallengeAsJpeg = jpegOutputStream.toByteArray();
 
         // 写入响应
         httpServletResponse.setHeader("Cache-Control", "no-store");

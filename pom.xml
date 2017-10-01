@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
+    <packaging>war</packaging>
     <groupId>groupId</groupId>
     <artifactId>Re-Novel</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -17,14 +17,39 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <!--<warName>ROOT</warName>-->
+                    <webXml>web\WEB-INF\web.xml</webXml>
+                    <archive>
+                        <addMavenDescriptor>false</addMavenDescriptor>
+                    </archive>
+                    <webResources>
+                        <!--<resource>-->
+                            <!--&lt;!&ndash;<directory>src/main/resources/config</directory>&ndash;&gt;-->
+                            <!--<targetPath>WEB-INF/classes</targetPath>-->
+                            <!--<filtering>true</filtering>-->
+                        <!--</resource>-->
+                        <resource>
+                            <directory>web</directory>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <repositories>
-        <repository>
-            <id>central</id>
-            <name>Maven Central</name>
-            <url>http://repo1.maven.org/maven2/</url>
-        </repository>
+            <repository>
+                <id>aliyunmaven</id>
+                <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            </repository>
+            <repository>
+                <id>central</id>
+                <name>Maven Central</name>
+                <url>http://repo1.maven.org/maven2/</url>
+            </repository>
     </repositories>
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
@@ -198,8 +223,20 @@
             <version>3.4.1</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-servlet-api -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-servlet-api</artifactId>
+            <version>9.0.0.M1</version>
+        </dependency>
+
+
 
     </dependencies>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
 
 </project>
