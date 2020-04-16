@@ -1,8 +1,8 @@
+# 已废弃
 # Re-Novel
 基于Java Web技术开发的动漫轻小说网站
 
 ## 网站地址
-[novel.ccyblog.com](https://novel.ccyblog.com)
 
 ## 开发计划
 1. 登录注册(已基本成完)
@@ -18,7 +18,6 @@
 [详细流程](https://github.com/isghost/Re-Novel/blob/master/RUN.md)
 
 ## 讨论群
-QQ:550479981 加群请备注来源
 
 ## 相关技术
 #### 后端
